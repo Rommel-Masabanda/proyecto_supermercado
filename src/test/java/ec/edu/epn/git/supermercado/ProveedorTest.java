@@ -16,4 +16,8 @@ public class ProveedorTest {
         lista.addProv(prove);
         lista.mostrarLista();
     }
+    @Test
+    public void generatePedido(){
+
+    }
 }
