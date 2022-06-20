@@ -9,9 +9,9 @@ public class Pedido {
     Date fechaPedido;
     Date fechaEntrega;
 
-    public Pedido(String nameProd, String nameProve, int quantity, Date fechaPedido, Date fechaEntrega) {
+    public Pedido(String nameProd, String nameCompany, int quantity, Date fechaPedido, Date fechaEntrega) {
         this.nameProd = nameProd;
-        this.nameCompany = nameProve;
+        this.nameCompany = nameCompany;
         this.quantity = quantity;
         this.fechaPedido = fechaPedido;
         this.fechaEntrega = fechaEntrega;
