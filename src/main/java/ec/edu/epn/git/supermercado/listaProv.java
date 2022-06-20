@@ -1,6 +1,7 @@
 package ec.edu.epn.git.supermercado;
 
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -32,4 +33,5 @@ public class listaProv {
             System.out.println(listaProvedores.get(i));
         }
     }
+
 }
