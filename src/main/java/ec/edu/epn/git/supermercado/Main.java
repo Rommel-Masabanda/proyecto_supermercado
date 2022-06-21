@@ -4,6 +4,11 @@ import java.io.IOException;
 
 public class Main {
     public static void main(String args[]) throws IOException {
+        ModuloProducto moduloProducto = new ModuloProducto();
+        moduloProducto.iniciarArchivoProducto();
+        moduloProducto.agregarNuevoProducto();
+        moduloProducto.mostrarProductosEnPantalla();
+
         /*listaProv lista = new listaProv();
         lista.addProv(lista.provedorDatos());
         lista.mostrarLista();*/
