@@ -7,10 +7,11 @@ public class Main {
 
         ModuloProducto moduloProducto = new ModuloProducto();
         moduloProducto.iniciarArchivoProducto();
-        moduloProducto.agregarNuevoProducto();
+        //moduloProducto.agregarNuevoProducto();
         moduloProducto.mostrarProductosEnPantalla();
         //moduloProducto.opcionBuscarPorNombre();
-        moduloProducto.eliminarProducto();
+        //moduloProducto.eliminarProducto();
+        moduloProducto.editarInfoProducto();
         moduloProducto.mostrarProductosEnPantalla();
 
         /*

@@ -184,6 +184,7 @@ public class ModuloProducto {
 
     public boolean eliminarProducto(){
         System.out.println("============Eliminar Productos============");
+        System.out.println("**** Primero debe ****");
         producto = opcionBuscarPorNombre();
         if(producto != null){
         System.out.println("|---Está seguro que desea eliminar "+producto.getNombre()+"-----|");
@@ -196,6 +197,51 @@ public class ModuloProducto {
             }else{
                 System.out.println("No se realizo cambios en el Archivo Productos");
             }
+        }
+        return false;
+    }
+
+    public boolean editarInfoProducto(){
+        System.out.println("========Editar Informacion Producto========");
+        System.out.println("**** Primero debe ****");
+        producto = opcionBuscarPorNombre();
+        if(producto != null){
+            System.out.println("Selecione el número del atributo que desea editar"+
+                    "\n1. Nombre"+
+                    "\n2. Cantidad"+
+                    "\n3. Costo"+
+                    "\n4. Pvp");
+            Scanner sc = new Scanner(System.in);
+            int atributo = sc.nextInt();
+            System.out.println("|---Está seguro que desea editar el producto "+producto.getNombre()+"-----|");
+            System.out.println("|------------[Si]-digite-1------[No]-digite-0------------|");
+            int respuesta = sc.nextInt();
+            if (respuesta==1){
+                System.out.println("Digite la nueva informacion");
+                sc=new Scanner(System.in);
+                switch (atributo){
+                    case 1:
+                        producto.setNombre(sc.nextLine());
+                        break;
+                    case 2:
+                        producto.setCantidad(sc.nextInt());
+                        break;
+                    case 3:
+                        producto.setCosto(Double.parseDouble(sc.next()));
+                        break;
+                    case 4:
+                        producto.setPvp(Double.parseDouble(sc.next()));
+                        break;
+                    default:
+                        System.out.println("Opción no valida");
+                }
+                agregarProductoAlArchivo();
+                System.out.println("Cambio realizado satisfactoriamente");
+            }else{
+                System.out.println("No se realizo cambios en el Archivo Productos");
+            }
+        }else{
+            System.out.println("No se realizo cambios en el Archivo Productos");
         }
         return false;
     }
