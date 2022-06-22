@@ -65,14 +65,12 @@ public class ModuloFacturaVenta {
 
     public FacturaVenta formularioFacturaVenta() {
         this.facturaVenta = new FacturaVenta();
-        System.out.println("__--Formulario para Generar una Factura de venta--__");
+        System.out.println("__--Formulario para Generar una Factura de Venta--__");
         System.out.println("_1_ Ingrese el nombre del producto");
         this.facturaVenta.getProduct().setNombre(this.leer.nextLine());
         System.out.println("_2_ Ingrese la cantidad del producto");
         this.facturaVenta.getProduct().setCantidad(this.leer.nextInt());
-        System.out.println("_3_ Ingrese el costo del producto");
-        this.facturaVenta.getProduct().setCosto(Double.parseDouble(this.leer.next()));
-        System.out.println("_4_ Ingrese el pvp del producto");
+        System.out.println("_3_ Ingrese el pvp del producto");
         this.facturaVenta.getProduct().setPvp(Double.parseDouble(this.leer.next()));
         this.facturaVenta.setPrecioFinal(calcularTotalFactura(facturaVenta.getProduct().getCantidad(),
                                                               facturaVenta.getProduct().getPvp()));
@@ -98,7 +96,7 @@ public class ModuloFacturaVenta {
     }
 
     public void agregarNuevoFacturaVenta(){
-        System.out.println("============Nueva Factura venta============");
+        System.out.println("============Nueva Factura de venta============");
         formularioFacturaVenta();
         if(opcionGuardarFacturaVenta()){
             if(singin()){
@@ -130,7 +128,7 @@ public class ModuloFacturaVenta {
 
     public void mostrarFacturaVentaEnPantalla(){
         leerArchivoFacturaVenta();
-        System.out.println("=========Lista de Facturas Ventas=========");
+        System.out.println("=========Lista de Facturas de Ventas=========");
         for (FacturaVenta fv : listaFacturaVenta) {
             facturaVenta = new FacturaVenta();
             facturaVenta = fv;
@@ -141,7 +139,7 @@ public class ModuloFacturaVenta {
     public void imprimirFacturaVenta(){
         System.out.println("Nombre: "+facturaVenta.getProduct().getNombre()+"\n"+
                 "Cantidad: "+facturaVenta.getProduct().getCantidad()+"\n"+
-                "PVP: "+facturaVenta.getProduct().getCosto()+"\n"+
+                "PVP: "+facturaVenta.getProduct().getPvp()+"\n"+
                 "Precio Final: "+facturaVenta.getPrecioFinal());
         System.out.println("-----------------------------");
     }

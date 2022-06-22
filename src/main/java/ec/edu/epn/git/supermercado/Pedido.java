@@ -1,8 +1,9 @@
 package ec.edu.epn.git.supermercado;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pedido {
+public class Pedido implements Serializable {
     String nameProd;
     String nameCompany;
     int quantity;
@@ -16,6 +17,8 @@ public class Pedido {
         this.fechaPedido = fechaPedido;
         this.fechaEntrega = fechaEntrega;
     }
+
+    public Pedido(){}
 
     public String getNameProd() {
         return nameProd;
