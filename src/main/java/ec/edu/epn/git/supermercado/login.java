@@ -2,6 +2,7 @@ package ec.edu.epn.git.supermercado;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
@@ -16,6 +17,10 @@ public class login {
     public login(String user, String password) {
         this.user = user;
         this.password = password;
+    }
+
+    public login(InputStream inputStream){
+        this.teclado = new Scanner(inputStream);
     }
 
     public String getUser() {

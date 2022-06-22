@@ -89,12 +89,6 @@ public class ModuloFacturaVenta {
         return (respuesta == 1);
     }
 
-    public boolean singin(){
-        newlogin = new login("admin", "123");
-        newlogin.aunticar();
-        return true;
-    }
-
     public void agregarNuevoFacturaVenta(){
         System.out.println("============Nueva Factura de venta============");
         formularioFacturaVenta();

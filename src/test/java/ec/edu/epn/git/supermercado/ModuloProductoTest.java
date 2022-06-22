@@ -35,8 +35,8 @@ public class ModuloProductoTest {
     public void given_String_when_buscarProducto_then_(){
         ModuloProducto mp = new ModuloProducto();
         mp.leerArchivoProducto();
-        int indice = mp.buscarProductoPorNombre("Coca Cola 1L");
-        Assert.assertNotNull(mp.resultadoBusquedaProducto(indice));
+        int indice = mp.buscarProductoPorNombre("");
+        Assert.assertNull(mp.resultadoBusquedaProducto(indice));
     }
 
 }
