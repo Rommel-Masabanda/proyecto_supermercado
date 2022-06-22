@@ -30,4 +30,12 @@ public class ModuloProductoTest {
         Assert.assertEquals(p2.getNombre(), p.getNombre());
         Assert.assertEquals((long)p2.getCantidad(), (long)p.getCantidad());
     }
+
+    @Test
+    public void given_String_when_buscarProducto_then_(){
+        ModuloProducto mp = new ModuloProducto();
+        mp.leerArchivoProducto();
+        int indice = mp.buscarProductoPorNombre("Coca Cola 1L");
+        Assert.assertNotNull(mp.resultadoBusquedaProducto(indice));
+    }
 }

@@ -97,12 +97,9 @@ public class ModuloProducto {
         System.out.println("============Nuevo Producto============");
         formularioProducto();
         if(opcionGuardarProducto()){
-            if(singin()){
                 listaProducto.add(producto);
                 agregarProductoAlArchivo();
                 System.out.println("Se guardo el nuevo producto");
-            }
-
         }else
             System.out.println("NO se guardo el nuevo producto");
     }
@@ -149,6 +146,40 @@ public class ModuloProducto {
         Scanner sc = new Scanner(System.in);
         int respuesta = sc.nextInt();
         return (respuesta == 1);
+    }
+
+    public int buscarProductoPorNombre(String nombreABuscar){
+        int i=-1;
+        for(Product p : listaProducto){
+            producto = new Product();
+            producto = p;
+            if(producto.getNombre().equals(nombreABuscar)){
+              i=listaProducto.indexOf(producto);
+            }
+        }
+        return i;
+    }
+
+    public Product resultadoBusquedaProducto(int i){
+        if (i==-1){
+            System.out.println("***El producto no existe");
+            return null;
+        }else {
+            System.out.println("***Producto encontrado");
+            producto = listaProducto.get(i);
+            imprimirProducto();
+            return producto;
+        }
+    }
+
+    public Product opcionBuscarPorNombre(){
+        String busqueda="";
+        System.out.println("============Buscar Productos============");
+        System.out.println("_1_Ingrese el nombre del producto a buscar");
+        //busqueda = leer.nextLine();
+        leer = new Scanner(System.in);
+        busqueda=leer.nextLine();
+        return resultadoBusquedaProducto(buscarProductoPorNombre(busqueda));
     }
 
     //
