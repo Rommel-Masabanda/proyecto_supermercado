@@ -11,7 +11,6 @@ public class ModuloProducto {
     private ArrayList<Product> listaProducto;
     private String nombreArchivo = "Productos.bin";
     private Scanner leer;
-    login newlogin;
 
     public Product getProduct() {
         return this.producto;
@@ -44,7 +43,6 @@ public class ModuloProducto {
     }
 
     public boolean agregarProductoAlArchivo(){
-
         File archivo = new File(nombreArchivo);
         FileOutputStream fos;
         ObjectOutputStream oos;
@@ -77,12 +75,6 @@ public class ModuloProducto {
         System.out.println("_4_ Ingrese el pvp del producto");
         this.producto.setPvp(Double.parseDouble(this.leer.next()));
         return this.producto;
-    }
-    //iniciar sesion
-    public boolean singin(){
-        newlogin = new login("admin", "123");
-        newlogin.aunticar();
-        return true;
     }
 
     public boolean opcionGuardarProducto(){
@@ -139,15 +131,6 @@ public class ModuloProducto {
         System.out.println("-----------------------------");
     }
 
-    //PREGUNTA SI DESEA EDITAR ALGÚN PRODUCTO
-    public boolean opcionEditarProducto(){
-        System.out.println("|---------¿Desea editar los datos?---------|");
-        System.out.println("|-----[Si]-digite-1----[No]-digite-0--------|");
-        Scanner sc = new Scanner(System.in);
-        int respuesta = sc.nextInt();
-        return (respuesta == 1);
-    }
-
     public int buscarProductoPorNombre(String nombreABuscar){
         int i=-1;
         for(Product p : listaProducto){
@@ -194,6 +177,7 @@ public class ModuloProducto {
             if (respuesta==1){
             listaProducto.remove(producto);
             agregarProductoAlArchivo();
+                System.out.println("Se ha eliminado el producto de manera satisfactoria");
             }else{
                 System.out.println("No se realizo cambios en el Archivo Productos");
             }
@@ -245,18 +229,4 @@ public class ModuloProducto {
         }
         return false;
     }
-
-
-    //
-    public void editarProducto(){
-        System.out.println("============Editando Producto============");
-        formularioProducto();
-        if(opcionGuardarProducto()){
-            listaProducto.add(producto);
-            agregarProductoAlArchivo();
-            System.out.println("Se guardo el nuevo producto");
-        }else
-            System.out.println("NO se guardo el nuevo producto");
-    }
-
 }

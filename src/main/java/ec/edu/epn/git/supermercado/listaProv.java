@@ -14,6 +14,7 @@ public class listaProv {
 
     public proveedor provedorDatos() throws IOException {
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("============Ingreso Proveedor============");
         System.out.println("Nombre:");
         String name = teclado.readLine();
         System.out.println("Empresa:");

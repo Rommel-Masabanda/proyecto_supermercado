@@ -14,6 +14,7 @@ public class ListaPedido {
 
     public Pedido datosPedido() throws IOException { //se llenan los datos del pedido
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("============Ingreso Pedido============");
         System.out.println("Nombre del Producto:");
         String Productname = teclado.readLine();
         System.out.println("Empresa:");
@@ -45,17 +46,17 @@ public class ListaPedido {
         int respuesta = sc.nextInt();
         return (respuesta == 1);
     }
-    //iniciar sesion
+    /*//iniciar sesion
     public boolean singin(){
         newlogin = new login("admin", "123");
         newlogin.aunticar();
         return true;
-    }
+    }*/
 
     //exportar Archivo
     public void export() {
         if(guardarArchivo()){
-            if(singin()){
+            //if(singin()){
                 String DetallePedido = "Factura"+ pedido.getNameProd() + pedido.getFechaPedido();
                 try{
                     FileWriter archivo = new FileWriter("C:\\Users\\yagua\\Desktop\\DetallePedido.txt", true);
@@ -66,7 +67,7 @@ public class ListaPedido {
                     archivo.close();
                     System.out.println("Se ha guardado y exportado la factura con éxito");
                 }catch (Exception ex){}
-            }
+            //}
         }else{
             System.out.println("GRACIAS VUELVA PRONTO");
         }
