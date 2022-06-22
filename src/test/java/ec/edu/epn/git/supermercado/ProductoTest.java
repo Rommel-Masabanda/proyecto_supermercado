@@ -3,12 +3,10 @@ package ec.edu.epn.git.supermercado;
 import org.junit.Assert;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
-public class ProductTest {
+public class ProductoTest {
     @Test
     public void given_a_Producto_when_is_created_then_ok() {
-        Product p = new Product();
+        Producto p = new Producto();
         Assert.assertNotNull(p);
     }
 

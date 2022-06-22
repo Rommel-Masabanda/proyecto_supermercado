@@ -1,16 +1,14 @@
 package ec.edu.epn.git.supermercado;
 
 import java.io.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Scanner;
 
 public class ListaPedido {
-    ArrayList<Pedido> listaPedido = new ArrayList<Pedido>();
+    ArrayList<Pedido> listaPedido = new ArrayList<>();
     Pedido pedido;
-    login newlogin;
+    Login newlogin;
 
     public Pedido datosPedido() throws IOException { //se llenan los datos del pedido
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
@@ -25,21 +23,23 @@ public class ListaPedido {
         Date fPedido = new Date();
         System.out.println("Fecha de Entrega: ");
         Date fEntrega = new Date();
-        pedido = new Pedido(Productname, company,quantity, fPedido, fEntrega);
+        pedido = new Pedido(Productname, company, quantity, fPedido, fEntrega);
         return pedido;
     }
 
-    public void addPedido(Pedido pedido){
+    public void addPedido(Pedido pedido) {
         listaPedido.add(pedido);
 
     }
-    public void showListaPedidos(){
-        for(int i = 0; i < listaPedido.size() ; i++){
-            System.out.println(listaPedido.get(i));
+
+    public void showListaPedidos() {
+        for (Pedido pedido : listaPedido) {
+            System.out.println(pedido);
         }
     }
+
     //opcion guardar
-    public boolean guardarArchivo(){
+    public boolean guardarArchivo() {
         System.out.println("|---------¿Desea exportar factura?---------|");
         System.out.println("|-----[Si]-digite-1----[No]-digite-0--------|");
         Scanner sc = new Scanner(System.in);
@@ -55,20 +55,21 @@ public class ListaPedido {
 
     //exportar Archivo
     public void export() {
-        if(guardarArchivo()){
+        if (guardarArchivo()) {
             //if(singin()){
-                String DetallePedido = "Factura"+ pedido.getNameProd() + pedido.getFechaPedido();
-                try{
-                    FileWriter archivo = new FileWriter("C:\\Users\\yagua\\Desktop\\DetallePedido.txt", true);
-                    try(BufferedWriter almacen = new BufferedWriter(archivo)){
-                        almacen.write(listaPedido + "\n");
-                        almacen.close();
-                    }
-                    archivo.close();
-                    System.out.println("Se ha guardado y exportado la factura con éxito");
-                }catch (Exception ex){}
+            String DetallePedido = "Factura" + pedido.getNameProd() + pedido.getFechaPedido();
+            try {
+                FileWriter archivo = new FileWriter("C:\\Users\\yagua\\Desktop\\DetallePedido.txt", true);
+                try (BufferedWriter almacen = new BufferedWriter(archivo)) {
+                    almacen.write(listaPedido + "\n");
+                }
+                archivo.close();
+                System.out.println("Se ha guardado y exportado la factura con éxito");
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
             //}
-        }else{
+        } else {
             System.out.println("GRACIAS VUELVA PRONTO");
         }
     }

@@ -1,18 +1,16 @@
 package ec.edu.epn.git.supermercado;
 
 import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Scanner;
 
-public class listaProv {
-    ArrayList<proveedor> listaProvedores = new ArrayList<proveedor>();
+public class ListaProv {
+    ArrayList<Proveedor> listaProvedores = new ArrayList<>();
     //Llenar datos del proveedor
-    proveedor proveedor;
+    Proveedor proveedor;
 
-    public proveedor provedorDatos() throws IOException {
+    public Proveedor provedorDatos() throws IOException {
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("============Ingreso Proveedor============");
         System.out.println("Nombre:");
@@ -21,17 +19,17 @@ public class listaProv {
         String company = teclado.readLine();
         System.out.println("Dias de Visita:");
         String days = teclado.readLine();
-        proveedor = new proveedor(name, company,days);
+        proveedor = new Proveedor(name, company,days);
 
         return proveedor;
     }
-    public void addProv(proveedor proveedor){
+    public void addProv(Proveedor proveedor){
         listaProvedores.add(proveedor);
     }
     //Muestra la lista de Proveedores
     public void mostrarLista(){
-        for(int i = 0; i < listaProvedores.size() ; i++){
-            System.out.println(listaProvedores.get(i));
+        for (Proveedor listaProvedore : listaProvedores) {
+            System.out.println(listaProvedore);
         }
     }
 

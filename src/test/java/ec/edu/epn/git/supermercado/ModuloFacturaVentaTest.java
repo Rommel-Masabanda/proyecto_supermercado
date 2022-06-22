@@ -26,8 +26,8 @@ public class ModuloFacturaVentaTest {
     public void given_formularioFacturaVenta_when_es_agregado_porTeclado_then_ok() {
         ByteArrayInputStream entradaPorTeclado = new ByteArrayInputStream("Coca Cola 1L\n7\n1.05\n1.20".getBytes());
         ModuloFacturaVenta mfv = new ModuloFacturaVenta(entradaPorTeclado);
-        Product p = mfv.formularioFacturaVenta().getProduct();
-        Product p2 = new Product("Coca Cola 1L", 7, 1.05, 1.2);
+        Producto p = mfv.formularioFacturaVenta().getProduct();
+        Producto p2 = new Producto("Coca Cola 1L", 7, 1.05, 1.2);
         Assert.assertEquals(p2.getNombre(), p.getNombre());
         Assert.assertEquals(p2.getCantidad(), p.getCantidad());
     }

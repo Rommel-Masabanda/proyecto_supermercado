@@ -3,19 +3,19 @@ package ec.edu.epn.git.supermercado;
 import java.io.Serializable;
 
 public class FacturaVenta implements Serializable {
-    public Product producto;
+    public Producto producto;
     public double precioFinal;
 
     public FacturaVenta(){
-        this.producto = new Product();
+        this.producto = new Producto();
         this.precioFinal = 0;
     }
 
-    public Product getProduct() {
+    public Producto getProduct() {
         return this.producto;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Producto product) {
         this.producto = product;
     }
 

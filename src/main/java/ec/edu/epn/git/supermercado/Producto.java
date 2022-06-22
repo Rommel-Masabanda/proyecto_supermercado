@@ -2,16 +2,16 @@ package ec.edu.epn.git.supermercado;
 
 import java.io.Serializable;
 
-public class Product implements Serializable {
+public class Producto implements Serializable {
     private String nombre;
     private int cantidad;
     private double costo;
     private double pvp;
 
-    public Product() {
+    public Producto() {
     }
 
-    public Product(String nombre, int cantidad, double costo, double pvp) {
+    public Producto(String nombre, int cantidad, double costo, double pvp) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.costo = costo;

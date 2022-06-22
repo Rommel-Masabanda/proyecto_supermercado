@@ -7,22 +7,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ModuloProducto {
-    private Product producto;
-    private ArrayList<Product> listaProducto;
+    private Producto producto;
+    private ArrayList<Producto> listaProducto;
     private String nombreArchivo = "Productos.bin";
     private Scanner leer;
 
-    public Product getProduct() {
+    public Producto getProduct() {
         return this.producto;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(Producto product) {
         this.producto = product;
     }
 
     public ModuloProducto(){
-        producto = new Product();
-        listaProducto = new ArrayList();
+        producto = new Producto();
+        listaProducto = new ArrayList<>();
         leer = new Scanner(System.in);
     }
 
@@ -63,8 +63,8 @@ public class ModuloProducto {
     }
 
     //Luego de guardar debemos ingresar la informacion
-    public Product formularioProducto() {
-        this.producto = new Product();
+    public Producto formularioProducto() {
+        this.producto = new Producto();
         System.out.println("__--Formulario para Agregar un Producto--__");
         System.out.println("_1_ Ingrese el nombre del producto");
         this.producto.setNombre(this.leer.nextLine());
@@ -99,11 +99,11 @@ public class ModuloProducto {
     public void leerArchivoProducto(){
         FileInputStream fis;
         ObjectInputStream ois;
-        listaProducto = new ArrayList();
+        listaProducto = new ArrayList<>();
         try {
             fis = new FileInputStream(nombreArchivo);
             ois = new ObjectInputStream(fis);
-            listaProducto = (ArrayList<Product>)ois.readObject();
+            listaProducto = (ArrayList<Producto>) ois.readObject();
         }catch(FileNotFoundException e){
             System.out.println("Archivo no existe");
         }catch (IOException e){
@@ -116,8 +116,7 @@ public class ModuloProducto {
     public void mostrarProductosEnPantalla(){
         leerArchivoProducto();
         System.out.println("=========Lista de Productos=========");
-        for (Product p : listaProducto) {
-            producto = new Product();
+        for (Producto p : listaProducto) {
             producto = p;
             imprimirProducto();
         }
@@ -133,8 +132,7 @@ public class ModuloProducto {
 
     public int buscarProductoPorNombre(String nombreABuscar){
         int i=-1;
-        for(Product p : listaProducto){
-            producto = new Product();
+        for(Producto p : listaProducto){
             producto = p;
             if(producto.getNombre().equals(nombreABuscar)){
               i=listaProducto.indexOf(producto);
@@ -143,7 +141,7 @@ public class ModuloProducto {
         return i;
     }
 
-    public Product resultadoBusquedaProducto(int i){
+    public Producto resultadoBusquedaProducto(int i){
         if (i==-1){
             System.out.println("***El producto no existe");
             return null;
@@ -155,8 +153,8 @@ public class ModuloProducto {
         }
     }
 
-    public Product opcionBuscarPorNombre(){
-        String busqueda="";
+    public Producto opcionBuscarPorNombre(){
+        String busqueda;
         System.out.println("============Buscar Productos============");
         System.out.println("_1_Ingrese el nombre del producto a buscar");
         //busqueda = leer.nextLine();

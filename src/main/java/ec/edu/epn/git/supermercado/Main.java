@@ -48,7 +48,7 @@ public class Main {
                             moduloProducto3.mostrarProductosEnPantalla();
                             break;
                         case 4:
-                            listaProv lista = new listaProv();
+                            ListaProv lista = new ListaProv();
                             lista.addProv(lista.provedorDatos());
                             lista.mostrarLista();
                             continuar=opcionSalir();
@@ -74,9 +74,9 @@ public class Main {
     }
 
     public static boolean singin(){
-        login newlogin = new login();
-        newlogin = new login("admin", "123");
-        newlogin.aunticar();
+        Login newlogin;
+        newlogin = new Login();
+        newlogin.auntenticar("Administrador", "p@ssw0rd");
         return true;
     }
     public static void bienvenida(){

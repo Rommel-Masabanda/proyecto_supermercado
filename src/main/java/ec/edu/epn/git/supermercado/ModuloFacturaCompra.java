@@ -23,7 +23,7 @@ public class ModuloFacturaCompra {
 
     public ModuloFacturaCompra(){
         facturaCompra = new FacturaCompra();
-        listaFacturaCompra = new ArrayList();
+        listaFacturaCompra = new ArrayList<>();
         leer = new Scanner(System.in);
     }
 
@@ -111,7 +111,7 @@ public class ModuloFacturaCompra {
     public void leerArchivoFacturaCompra(){
         FileInputStream fis;
         ObjectInputStream ois;
-        listaFacturaCompra = new ArrayList();
+        listaFacturaCompra = new ArrayList<>();
         try {
             fis = new FileInputStream(nombreArchivo);
             ois = new ObjectInputStream(fis);
@@ -119,7 +119,7 @@ public class ModuloFacturaCompra {
         }catch(FileNotFoundException e){
             System.out.println("Archivo no existe");
         }catch (IOException e){
-            System.out.println(e);
+            e.printStackTrace();
         }catch (ClassNotFoundException e){
             Logger.getLogger(ModuloProducto.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -129,7 +129,6 @@ public class ModuloFacturaCompra {
         leerArchivoFacturaCompra();
         System.out.println("=========Lista de Facturas Compra=========");
         for (FacturaCompra fc : listaFacturaCompra) {
-            facturaCompra = new FacturaCompra();
             facturaCompra = fc;
             imprimirFacturaCompra();
         }
@@ -147,7 +146,7 @@ public class ModuloFacturaCompra {
 
     public boolean actualizarStockFacturaCompra(){
         ModuloProducto mp = new ModuloProducto();
-        Product p = new Product();
+        Producto p;
         mp.leerArchivoProducto();
         int i = mp.buscarProductoPorNombre(facturaCompra.getPedido().getNameProd());
         p = mp.resultadoBusquedaProducto(i);

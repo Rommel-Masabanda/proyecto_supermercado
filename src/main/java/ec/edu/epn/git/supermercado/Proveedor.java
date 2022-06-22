@@ -1,11 +1,11 @@
 package ec.edu.epn.git.supermercado;
 
-public class proveedor {
+public class Proveedor {
     public String name;
     public String company;
     public String days;
 
-    public proveedor(String name, String company, String days) {
+    public Proveedor(String name, String company, String days) {
         this.name = name;
         this.company = company;
         this.days = days;
