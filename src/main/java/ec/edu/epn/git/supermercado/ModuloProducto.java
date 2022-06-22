@@ -11,6 +11,7 @@ public class ModuloProducto {
     private ArrayList<Product> listaProducto;
     private String nombreArchivo = "Productos.bin";
     private Scanner leer;
+    login newlogin;
 
     public Product getProduct() {
         return this.producto;
@@ -77,6 +78,12 @@ public class ModuloProducto {
         this.producto.setPvp(Double.parseDouble(this.leer.next()));
         return this.producto;
     }
+    //iniciar sesion
+    public boolean singin(){
+        newlogin = new login("admin", "123");
+        newlogin.aunticar();
+        return true;
+    }
 
     public boolean opcionGuardarProducto(){
         System.out.println("|---------¿Desea guardar los datos?---------|");
@@ -90,9 +97,12 @@ public class ModuloProducto {
         System.out.println("============Nuevo Producto============");
         formularioProducto();
         if(opcionGuardarProducto()){
-            listaProducto.add(producto);
-            agregarProductoAlArchivo();
-            System.out.println("Se guardo el nuevo producto");
+            if(singin()){
+                listaProducto.add(producto);
+                agregarProductoAlArchivo();
+                System.out.println("Se guardo el nuevo producto");
+            }
+
         }else
             System.out.println("NO se guardo el nuevo producto");
     }
@@ -131,4 +141,26 @@ public class ModuloProducto {
                 "Pvp: "+producto.getPvp());
         System.out.println("-----------------------------");
     }
+
+    //PREGUNTA SI DESEA EDITAR ALGÚN PRODUCTO
+    public boolean opcionEditarProducto(){
+        System.out.println("|---------¿Desea editar los datos?---------|");
+        System.out.println("|-----[Si]-digite-1----[No]-digite-0--------|");
+        Scanner sc = new Scanner(System.in);
+        int respuesta = sc.nextInt();
+        return (respuesta == 1);
+    }
+
+    //
+    public void editarProducto(){
+        System.out.println("============Editando Producto============");
+        formularioProducto();
+        if(opcionGuardarProducto()){
+            listaProducto.add(producto);
+            agregarProductoAlArchivo();
+            System.out.println("Se guardo el nuevo producto");
+        }else
+            System.out.println("NO se guardo el nuevo producto");
+    }
+
 }

@@ -11,6 +11,7 @@ public class ModuloFacturaVenta {
     private ArrayList<FacturaVenta> listaFacturaVenta;
     private String nombreArchivo = "FacturasVenta.bin";
     private Scanner leer;
+    login newlogin;
 
     public FacturaVenta getfacturaVenta() {
         return this.facturaVenta;
@@ -90,13 +91,22 @@ public class ModuloFacturaVenta {
         return (respuesta == 1);
     }
 
+    public boolean singin(){
+        newlogin = new login("admin", "123");
+        newlogin.aunticar();
+        return true;
+    }
+
     public void agregarNuevoFacturaVenta(){
         System.out.println("============Nueva Factura venta============");
         formularioFacturaVenta();
         if(opcionGuardarFacturaVenta()){
-            listaFacturaVenta.add(facturaVenta);
-            agregarFacturaVentaAlArchivo();
-            System.out.println("Se guardo el nuevo producto");
+            if(singin()){
+                listaFacturaVenta.add(facturaVenta);
+                agregarFacturaVentaAlArchivo();
+                System.out.println("Se guardo el nuevo producto");
+            }
+
         }else
             System.out.println("NO se guardo el nuevo producto");
     }
