@@ -182,6 +182,25 @@ public class ModuloProducto {
         return resultadoBusquedaProducto(buscarProductoPorNombre(busqueda));
     }
 
+    public boolean eliminarProducto(){
+        System.out.println("============Eliminar Productos============");
+        producto = opcionBuscarPorNombre();
+        if(producto != null){
+        System.out.println("|---Está seguro que desea eliminar "+producto.getNombre()+"-----|");
+        System.out.println("|------[Si]-digite-1---[No]-digite-0------|");
+        Scanner sc = new Scanner(System.in);
+        int respuesta = sc.nextInt();
+            if (respuesta==1){
+            listaProducto.remove(producto);
+            agregarProductoAlArchivo();
+            }else{
+                System.out.println("No se realizo cambios en el Archivo Productos");
+            }
+        }
+        return false;
+    }
+
+
     //
     public void editarProducto(){
         System.out.println("============Editando Producto============");

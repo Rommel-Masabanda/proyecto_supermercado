@@ -38,4 +38,5 @@ public class ModuloProductoTest {
         int indice = mp.buscarProductoPorNombre("Coca Cola 1L");
         Assert.assertNotNull(mp.resultadoBusquedaProducto(indice));
     }
+
 }

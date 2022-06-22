@@ -9,7 +9,9 @@ public class Main {
         moduloProducto.iniciarArchivoProducto();
         moduloProducto.agregarNuevoProducto();
         moduloProducto.mostrarProductosEnPantalla();
-        moduloProducto.opcionBuscarPorNombre();
+        //moduloProducto.opcionBuscarPorNombre();
+        moduloProducto.eliminarProducto();
+        moduloProducto.mostrarProductosEnPantalla();
 
         /*
         ModuloFacturaVenta mfv = new ModuloFacturaVenta();
