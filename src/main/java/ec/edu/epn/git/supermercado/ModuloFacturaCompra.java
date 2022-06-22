@@ -95,9 +95,15 @@ public class ModuloFacturaCompra {
         System.out.println("============Nueva Factura de Compra============");
         formularioFacturaCompra();
         if(opcionGuardarFacturaVenta()){
+            if(actualizarStockFacturaCompra()){
+                System.out.println("***Actualizando Inventario");
+                listaFacturaCompra.add(facturaCompra);
+                agregarFacturaCompraAlArchivo();
+            }else{
             listaFacturaCompra.add(facturaCompra);
             agregarFacturaCompraAlArchivo();
             System.out.println("Se guardo la factura de compra");
+            }
         }else
             System.out.println("NO se guardo la factura de compra");
     }
@@ -137,5 +143,21 @@ public class ModuloFacturaCompra {
                 "Costo Producto: "+facturaCompra.getCostoProducto()+"\n"+
                 "Precio final de la compra: "+facturaCompra.getPrecioFinalCompra());
         System.out.println("-----------------------------");
+    }
+
+    public boolean actualizarStockFacturaCompra(){
+        ModuloProducto mp = new ModuloProducto();
+        Product p = new Product();
+        mp.leerArchivoProducto();
+        int i = mp.buscarProductoPorNombre(facturaCompra.getPedido().getNameProd());
+        p = mp.resultadoBusquedaProducto(i);
+        if(p == null){
+            return false;
+        }else{
+                int suma = p.getCantidad() + facturaCompra.getPedido().getQuantity();
+                mp.getProduct().setCantidad(suma);
+                mp.agregarProductoAlArchivo();
+                return true;
+        }
     }
 }

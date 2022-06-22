@@ -99,12 +99,15 @@ public class ModuloFacturaVenta {
         System.out.println("============Nueva Factura de venta============");
         formularioFacturaVenta();
         if(opcionGuardarFacturaVenta()){
-            if(singin()){
-                listaFacturaVenta.add(facturaVenta);
-                agregarFacturaVentaAlArchivo();
-                System.out.println("Se guardo el nuevo producto");
-            }
-
+                if(actualizarStockFacturaVenta()){
+                    System.out.println("***Actualizando Inventario");
+                    listaFacturaVenta.add(facturaVenta);
+                    agregarFacturaVentaAlArchivo();
+                }else{
+                    listaFacturaVenta.add(facturaVenta);
+                    agregarFacturaVentaAlArchivo();
+                    System.out.println("Se guardo el nuevo producto");
+                }
         }else
             System.out.println("NO se guardo el nuevo producto");
     }
@@ -142,5 +145,28 @@ public class ModuloFacturaVenta {
                 "PVP: "+facturaVenta.getProduct().getPvp()+"\n"+
                 "Precio Final: "+facturaVenta.getPrecioFinal());
         System.out.println("-----------------------------");
+    }
+
+    public boolean actualizarStockFacturaVenta(){
+        ModuloProducto mp = new ModuloProducto();
+        Product p = new Product();
+        mp.leerArchivoProducto();
+        int i = mp.buscarProductoPorNombre(facturaVenta.getProduct().getNombre());
+        p = mp.resultadoBusquedaProducto(i);
+        if(p == null){
+            return false;
+        }else{
+             if (facturaVenta.getProduct().getCantidad() <= p.getCantidad()){
+                 int resta = p.getCantidad() - facturaVenta.getProduct().getCantidad();
+                 mp.getProduct().setCantidad(resta);
+                 //facturaVenta.getProduct().setCantidad(resta);
+                 mp.agregarProductoAlArchivo();
+                 //agregarFacturaVentaAlArchivo();
+                 return true;
+             }else{
+                 System.out.println("No se puede generar esta factura hay un menor stock :(");
+                 return false;
+             }
+        }
     }
 }

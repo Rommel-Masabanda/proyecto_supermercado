@@ -8,10 +8,10 @@ public class Main {
         ModuloProducto moduloProducto = new ModuloProducto();
         moduloProducto.iniciarArchivoProducto();
         //moduloProducto.agregarNuevoProducto();
-        moduloProducto.mostrarProductosEnPantalla();
+        //moduloProducto.mostrarProductosEnPantalla();
         //moduloProducto.opcionBuscarPorNombre();
         //moduloProducto.eliminarProducto();
-        moduloProducto.editarInfoProducto();
+        //moduloProducto.editarInfoProducto();
         moduloProducto.mostrarProductosEnPantalla();
 
         /*
@@ -19,7 +19,17 @@ public class Main {
         mfv.iniciarArchivoFacturaVenta();
         mfv.agregarNuevoFacturaVenta();
         mfv.mostrarFacturaVentaEnPantalla();
-        */
+        moduloProducto.mostrarProductosEnPantalla();
+        mfv.mostrarFacturaVentaEnPantalla();
+         */
+
+        ModuloFacturaCompra mfc = new ModuloFacturaCompra();
+        mfc.iniciarArchivoFacturaCompra();
+        mfc.agregarNuevaFacturaCompra();
+        mfc.mostrarFacturaCompraEnPantalla();
+        moduloProducto.mostrarProductosEnPantalla();
+        mfc.mostrarFacturaCompraEnPantalla();
+
         /*listaProv lista = new listaProv();
         lista.addProv(lista.provedorDatos());
         lista.mostrarLista();*/
