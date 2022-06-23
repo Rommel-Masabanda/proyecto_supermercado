@@ -11,6 +11,7 @@ public class ModuloFacturaVenta {
     private ArrayList<FacturaVenta> listaFacturaVenta;
     private String nombreArchivo = "FacturasVenta.bin";
     private Scanner leer;
+    private EscrituraLecturaArchivo<ArrayList<FacturaVenta>> archivo;
     Login newlogin;
 
     public FacturaVenta getfacturaVenta() {
@@ -24,6 +25,7 @@ public class ModuloFacturaVenta {
     public ModuloFacturaVenta() {
         listaFacturaVenta = new ArrayList<>();
         leer = new Scanner(System.in);
+        archivo = new EscrituraLecturaArchivo<>(nombreArchivo);
     }
 
     public ModuloFacturaVenta(InputStream inputStream) {
@@ -43,21 +45,11 @@ public class ModuloFacturaVenta {
     }
 
     public boolean agregarFacturaVentaAlArchivo() {
-
-        File archivo = new File(nombreArchivo);
-        FileOutputStream fos;
-        ObjectOutputStream oos;
         try {
-            fos = new FileOutputStream(archivo);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(listaFacturaVenta);
-            oos.close();
+            archivo.escribirArchivo(listaFacturaVenta);
             return true;
-        } catch (FileNotFoundException e) {
-            System.out.println("Error al localizar el archivo");
-            return false;
         } catch (IOException e) {
-            System.out.println("Error al manipular el archivo");
+            System.err.println("Error al manipular el archivo");
             return false;
         }
     }
@@ -106,17 +98,10 @@ public class ModuloFacturaVenta {
     }
 
     public void leerArchivoFacturaVenta() {
-        FileInputStream fis;
-        ObjectInputStream ois;
-        listaFacturaVenta = new ArrayList<>();
         try {
-            fis = new FileInputStream(nombreArchivo);
-            ois = new ObjectInputStream(fis);
-            listaFacturaVenta = (ArrayList<FacturaVenta>) ois.readObject();
-        } catch (FileNotFoundException e) {
-            System.out.println("Archivo no existe");
+            listaFacturaVenta = archivo.leerArchivo();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error al manipular archivo");
         } catch (ClassNotFoundException e) {
             Logger.getLogger(ModuloProducto.class.getName()).log(Level.SEVERE, null, e);
         }
@@ -150,7 +135,7 @@ public class ModuloFacturaVenta {
         } else {
             if (facturaVenta.getProduct().getCantidad() <= p.getCantidad()) {
                 int resta = p.getCantidad() - facturaVenta.getProduct().getCantidad();
-                mp.getProduct().setCantidad(resta);
+                p.setCantidad(resta);
                 //facturaVenta.getProduct().setCantidad(resta);
                 mp.agregarProductoAlArchivo();
                 //agregarFacturaVentaAlArchivo();

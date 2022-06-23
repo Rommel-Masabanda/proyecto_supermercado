@@ -11,54 +11,45 @@ public class ModuloFacturaCompra {
     private ArrayList<FacturaCompra> listaFacturaCompra;
     private String nombreArchivo = "FacturasCompra.bin";
     private Scanner leer;
+    private EscrituraLecturaArchivo<ArrayList<FacturaCompra>> archivo;
 
     public FacturaCompra getfacturaVenta() {
         return this.facturaCompra;
     }
 
-    public void setFacturaCompra(FacturaCompra facturaCompra)
-    {
+    public void setFacturaCompra(FacturaCompra facturaCompra) {
         this.facturaCompra = facturaCompra;
     }
 
-    public ModuloFacturaCompra(){
+    public ModuloFacturaCompra() {
         facturaCompra = new FacturaCompra();
         listaFacturaCompra = new ArrayList<>();
         leer = new Scanner(System.in);
+        archivo = new EscrituraLecturaArchivo<>(nombreArchivo);
     }
 
     public ModuloFacturaCompra(InputStream inputStream) {
         this.leer = new Scanner(inputStream);
     }
 
-    public boolean iniciarArchivoFacturaCompra(){
+    public boolean iniciarArchivoFacturaCompra() {
         File fichero = new File(nombreArchivo);
-        if (fichero.exists()){
+        if (fichero.exists()) {
             System.out.println("Utilizando el archivo: " + nombreArchivo);
             leerArchivoFacturaCompra();
             return true;
-        }else{
-            System.out.println("No existe archivo entonces se creará el archivo: "+ nombreArchivo );
+        } else {
+            System.out.println("No existe archivo entonces se creará el archivo: " + nombreArchivo);
             return false;
         }
     }
 
-    public boolean agregarFacturaCompraAlArchivo(){
-
-        File archivo = new File(nombreArchivo);
-        FileOutputStream fos;
-        ObjectOutputStream oos;
+    public boolean agregarFacturaCompraAlArchivo() {
         try {
-            fos = new FileOutputStream(archivo);
-            oos = new ObjectOutputStream(fos);
-            oos.writeObject(listaFacturaCompra);
-            oos.close();
+            archivo.escribirArchivo(listaFacturaCompra);
             return true;
-        }catch(FileNotFoundException e){
-            System.out.println("Error al localizar el archivo");
-            return false;
-        }catch (IOException e){
-            System.out.println("Error al manipular el archivo");
+        } catch (IOException e) {
+            System.err.println("Error al manipual el archivo");
             return false;
         }
     }
@@ -79,11 +70,11 @@ public class ModuloFacturaCompra {
         return facturaCompra;
     }
 
-    public double calcularTotalFactura(int cantidad, double pvp){
-        return cantidad*pvp;
+    public double calcularTotalFactura(int cantidad, double pvp) {
+        return cantidad * pvp;
     }
 
-    public boolean opcionGuardarFacturaVenta(){
+    public boolean opcionGuardarFacturaVenta() {
         System.out.println("|---------¿Desea guardar la factura de Compra?---------|");
         System.out.println("|------------[Si]-digite-1----[No]-digite-0-----------|");
         Scanner sc = new Scanner(System.in);
@@ -91,41 +82,34 @@ public class ModuloFacturaCompra {
         return (respuesta == 1);
     }
 
-    public void agregarNuevaFacturaCompra(){
+    public void agregarNuevaFacturaCompra() {
         System.out.println("============Nueva Factura de Compra============");
         formularioFacturaCompra();
-        if(opcionGuardarFacturaVenta()){
-            if(actualizarStockFacturaCompra()){
+        if (opcionGuardarFacturaVenta()) {
+            if (actualizarStockFacturaCompra()) {
                 System.out.println("***Actualizando Inventario");
                 listaFacturaCompra.add(facturaCompra);
                 agregarFacturaCompraAlArchivo();
-            }else{
-            listaFacturaCompra.add(facturaCompra);
-            agregarFacturaCompraAlArchivo();
-            System.out.println("Se guardo la factura de compra");
+            } else {
+                listaFacturaCompra.add(facturaCompra);
+                agregarFacturaCompraAlArchivo();
+                System.out.println("Se guardo la factura de compra");
             }
-        }else
+        } else
             System.out.println("NO se guardo la factura de compra");
     }
 
-    public void leerArchivoFacturaCompra(){
-        FileInputStream fis;
-        ObjectInputStream ois;
-        listaFacturaCompra = new ArrayList<>();
+    public void leerArchivoFacturaCompra() {
         try {
-            fis = new FileInputStream(nombreArchivo);
-            ois = new ObjectInputStream(fis);
-            listaFacturaCompra = (ArrayList<FacturaCompra>)ois.readObject();
-        }catch(FileNotFoundException e){
-            System.out.println("Archivo no existe");
-        }catch (IOException e){
-            e.printStackTrace();
-        }catch (ClassNotFoundException e){
+            listaFacturaCompra = archivo.leerArchivo();
+        } catch (IOException e) {
+            System.err.println("Error al manipular el archivo");
+        } catch (ClassNotFoundException e) {
             Logger.getLogger(ModuloProducto.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    public void mostrarFacturaCompraEnPantalla(){
+    public void mostrarFacturaCompraEnPantalla() {
         leerArchivoFacturaCompra();
         System.out.println("=========Lista de Facturas Compra=========");
         for (FacturaCompra fc : listaFacturaCompra) {
@@ -134,29 +118,29 @@ public class ModuloFacturaCompra {
         }
     }
 
-    public void imprimirFacturaCompra(){
+    public void imprimirFacturaCompra() {
         System.out.println
-                ("Nombre Proveedor: "+facturaCompra.getPedido().getNameCompany()+"\n"+
-                "Nombre Producto: "+facturaCompra.getPedido().getNameProd()+"\n"+
-                "Cantidad Producto: "+facturaCompra.getPedido().getQuantity()+"\n"+
-                "Costo Producto: "+facturaCompra.getCostoProducto()+"\n"+
-                "Precio final de la compra: "+facturaCompra.getPrecioFinalCompra());
+                ("Nombre Proveedor: " + facturaCompra.getPedido().getNameCompany() + "\n" +
+                        "Nombre Producto: " + facturaCompra.getPedido().getNameProd() + "\n" +
+                        "Cantidad Producto: " + facturaCompra.getPedido().getQuantity() + "\n" +
+                        "Costo Producto: " + facturaCompra.getCostoProducto() + "\n" +
+                        "Precio final de la compra: " + facturaCompra.getPrecioFinalCompra());
         System.out.println("-----------------------------");
     }
 
-    public boolean actualizarStockFacturaCompra(){
+    public boolean actualizarStockFacturaCompra() {
         ModuloProducto mp = new ModuloProducto();
         Producto p;
         mp.leerArchivoProducto();
         int i = mp.buscarProductoPorNombre(facturaCompra.getPedido().getNameProd());
         p = mp.resultadoBusquedaProducto(i);
-        if(p == null){
+        if (p == null) {
             return false;
-        }else{
-                int suma = p.getCantidad() + facturaCompra.getPedido().getQuantity();
-                mp.getProduct().setCantidad(suma);
-                mp.agregarProductoAlArchivo();
-                return true;
+        } else {
+            int suma = p.getCantidad() + facturaCompra.getPedido().getQuantity();
+            p.setCantidad(suma);
+            mp.agregarProductoAlArchivo();
+            return true;
         }
     }
 }

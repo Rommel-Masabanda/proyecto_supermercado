@@ -20,7 +20,6 @@ public class Main {
                         case 1:
                             ModuloProducto moduloProducto = new ModuloProducto();
                             moduloProducto.iniciarArchivoProducto();
-                            moduloProducto.agregarNuevoProducto();
                             moduloProducto.mostrarProductosEnPantalla();
                             moduloProducto.eliminarProducto();
                             moduloProducto.mostrarProductosEnPantalla();

@@ -11,19 +11,19 @@ public class ModuloFacturaVentaTest {
 
 
     @Test
-    public void given_inicarArhivoProducto_when_is_called_then_ok() {
+    public void when_iniciar_arhivo_producto_then_ok() {
         ModuloFacturaVenta mfv = new ModuloFacturaVenta();
         Assert.assertTrue(mfv.iniciarArchivoFacturaVenta());
     }
 
     @Test
-    public void given_agregarFacturaVentaAlArchivo_when_hay_archivo_then_escribe() {
+    public void when_agregar_factura_venta_al_archivo_then_ok() {
         ModuloFacturaVenta mfv = new ModuloFacturaVenta();
         Assert.assertTrue(mfv.agregarFacturaVentaAlArchivo());
     }
 
     @Test
-    public void given_formularioFacturaVenta_when_es_agregado_porTeclado_then_ok() {
+    public void when_formulario_factura_venta_then_ok() {
         ByteArrayInputStream entradaPorTeclado = new ByteArrayInputStream("Coca Cola 1L\n7\n1.05\n1.20".getBytes());
         ModuloFacturaVenta mfv = new ModuloFacturaVenta(entradaPorTeclado);
         Producto p = mfv.formularioFacturaVenta().getProduct();
@@ -33,7 +33,7 @@ public class ModuloFacturaVentaTest {
     }
 
     @Test
-    public void given_2enteros_when_calcularTotalFactura_then_ok(){
+    public void given_two_numbers_when_calcular_total_factura_then_ok(){
         ModuloFacturaVenta mfv = new ModuloFacturaVenta();
         String respuesta = String.valueOf(mfv.calcularTotalFactura(5,0.50));
         assertEquals("2.5",respuesta);

@@ -9,19 +9,19 @@ import static org.junit.Assert.*;
 
 public class ModuloFacturaCompraTest {
     @Test
-    public void given_inicarArhivoProducto_when_is_called_then_ok() {
+    public void when_iniciar_archivo_factura_compra_then_ok() {
         ModuloFacturaCompra mfc = new ModuloFacturaCompra();
         Assert.assertTrue(mfc.iniciarArchivoFacturaCompra());
     }
 
     @Test
-    public void given_agregarFacturaCompraAlArchivo_when_hay_archivo_then_escribe() {
+    public void when_agregar_factura_compra_al_archivo_then_ok() {
         ModuloFacturaCompra mfc = new ModuloFacturaCompra();
         Assert.assertTrue(mfc.agregarFacturaCompraAlArchivo());
     }
 
     @Test
-    public void given_formularioFacturaCompra_when_es_agregado_porTeclado_then_ok() {
+    public void when_formulario_factura_compra_then_ok() {
         ByteArrayInputStream entradaPorTeclado = new ByteArrayInputStream("Proveedor 1\nCoca Cola 1L\n7\n1.10".getBytes());
         ModuloFacturaCompra mfc = new ModuloFacturaCompra(entradaPorTeclado);
         Pedido p = mfc.formularioFacturaCompra().getPedido();
@@ -31,7 +31,7 @@ public class ModuloFacturaCompraTest {
     }
 
     @Test
-    public void given_2enteros_when_calcularTotalFactura_then_ok(){
+    public void given_two_numbers_when_calcular_total_factura_then_ok(){
         ModuloFacturaCompra mfc = new ModuloFacturaCompra();
         String respuesta = String.valueOf(mfc.calcularTotalFactura(5,0.50));
         assertEquals("2.5",respuesta);

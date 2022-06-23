@@ -49,5 +49,13 @@ public class Producto implements Serializable {
     public void setPvp(double pvp) {
         this.pvp = pvp;
     }
+
+    public void imprimirProducto() {
+        System.out.println("Nombre: "+this.nombre+"\n"+
+                "Cantidad: "+this.cantidad+"\n"+
+                "Costo: "+this.costo+"\n"+
+                "Pvp: "+this.pvp);
+        System.out.println("-----------------------------");
+    }
 }
 
